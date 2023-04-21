@@ -37,17 +37,17 @@
 from docx import Document
 from docx2pdf import convert
 from simple_colors import *
-
+import json 
 doc = Document('investordoc.docx')
-replacements = {
-    '${InvestorName}': "Parag Poddar ",
-    '${Date}':  "\u0332".join('18-04-2023'),
-    '${Place}':  "\u0332".join('Hyderabad'),
-    }
+f = open('replacementData.json')
+  
+# returns JSON object as 
+# a dictionary
+replacements = json.load(f)
 
 for paragraph in doc.paragraphs:
     for key in replacements:
         paragraph.text = paragraph.text.replace(key, replacements[key])
 
-doc.save('abcd.docx')
-convert('abcd.docx', 'output.pdf')
+doc.save('abcde.docx')
+convert('abcde.docx', 'output.pdf')
